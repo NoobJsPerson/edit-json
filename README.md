@@ -10,6 +10,6 @@ const client = new edit('./storage.json');
 // assign a value to a property in the default file
 client.setProperty('color','blue')
 ```
-| test | other test |
-|:----:|:---:|
-|twat | sjsjskzsj.  |
+| setProperty(property,value,file) |
+|:----:|
+| sets the property to the passed value in the passed file directory (from the root)  |
