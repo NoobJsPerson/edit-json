@@ -54,4 +54,4 @@ module.exports = class EditClient {
     const content = await fs.promises.readFile(file);
     return property ? content[property] : content;
   }
-}
+};
