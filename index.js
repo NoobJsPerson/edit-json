@@ -1,11 +1,14 @@
 const fs = require('fs');
+function adjustfiledir(file){
+	return __dirname+(file.startsWith(".")?file.replace(".",""):file);
+}
 module.exports = class EditClient {
   constructor(defaultFile,relative){
-    this.defaultFile = relative?__dirname+defaultFile:defaultFile;
+    this.defaultFile = relative?adjustfiledir(defaultFile):defaultFile;
   }
   async editProperty(property,value,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to edit");
-    if(relative && (this.defaultFile != file || !file.startsWith(__dirname))) file = __dirname+file;
+    if(relative && (this.defaultFile != file || !file.startsWith(__dirname))) file = adjustfiledir(file);
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
     fileObject[property] = value;
@@ -14,7 +17,7 @@ module.exports = class EditClient {
   }
   async deleteProperty(property,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to edit");
-    if(relative && (this.defaultFile != file || !file.startsWith(__dirname))) file = __dirname+file;
+    if(relative && (this.defaultFile != file || !file.startsWith(__dirname))) file = adjustfiledir(file);
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
     delete fileObject[property];
@@ -23,7 +26,7 @@ module.exports = class EditClient {
   }
   async deleteProperties(properties,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to edit")
-    if(relative && (this.defaultFile != file || !file.startsWith(__dirname))) file = __dirname+file;
+    if(relative && (this.defaultFile != file || !file.startsWith(__dirname))) file = adjustfiledir(file);
     if(!(properties instanceof Array)) throw Error("properties must be an Array");
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
@@ -34,7 +37,7 @@ module.exports = class EditClient {
   }
   async editProperties(properties,values ,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to edit");
-    if(relative && (this.defaultFile != file || !file.startsWith(__dirname))) file = __dirname+file;
+    if(relative && (this.defaultFile != file || !file.startsWith(__dirname))) file = adjustfiledir(file);
     if(!(properties instanceof Array)) throw Error("properties must be an Array");
     if(!(values instanceof Array)) throw Error("values must be an Array");
     const content = await fs.promises.readFile(file);
@@ -47,7 +50,7 @@ module.exports = class EditClient {
   }
   async getValue(property,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to get value from");
-    if(relative && (this.defaultFile != file || !file.startsWith(__dirname))) file = __dirname+file;
+    if(relative && (this.defaultFile != file || !file.startsWith(__dirname))) file = adjustfiledir(file);
     const content = await fs.promises.readFile(file);
     return content[property];
   }
