@@ -52,6 +52,6 @@ module.exports = class EditClient {
     if(!file) throw Error("No JSON to get value from");
     if(relative && (this.defaultFile != file || !file.startsWith(__dirname))) file = adjustfiledir(file);
     const content = await fs.promises.readFile(file);
-    return content[property];
+    return property ? content[property] : content;
   }
 }
