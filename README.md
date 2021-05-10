@@ -26,5 +26,7 @@ An instance of the `EditClient` class
   * **relative**: a boolean specifying if the directory should be relative to the location of the file that the function got called in.
 * returns:
 An empty promise.
+#### Disclaimer
+this package is still under development consider contributing to it in the GitHub repository
 
 
