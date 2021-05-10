@@ -3,6 +3,16 @@ function adjustfiledir(file,dir){
 	return dir+(file.startsWith(".")?file.replace(".",""):file);
 }
 module.exports = class EditClient {
+	/**
+	 * EditClient
+     *
+     * @name EditClient
+     * @function
+     * @param {String} file the path to the file
+     * @param {String} dirname the default directory to edit files relatively from
+     * @param {Boolean} relative to specify if the default file directory should be relative to dirname
+     * @returns {EditClient} The `EditClient` instance
+	 */
   constructor(defaultFile,dirname,relative){
     this.dirname = dirname  	
     this.defaultFile = dirname&&relative?adjustfiledir(defaultFile,dirname):defaultFile;
