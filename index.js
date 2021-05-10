@@ -7,7 +7,7 @@ module.exports = class EditClient {
     this.dirname = dirname  	
     this.defaultFile = dirname&&relative?adjustfiledir(defaultFile,dirname):defaultFile;
   }
-  async editProperty(property,value,file = this.defaultFile,relative){
+  async setProperty(property,value,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to edit");
     if(relative && (this.defaultFile != file || file && !file.startsWith(this.dirname)) && this.dirname) file = adjustfiledir(file,this.dirname);
     const content = await fs.promises.readFile(file);
@@ -36,7 +36,7 @@ module.exports = class EditClient {
     }
     return await fs.promises.writeFile(file, JSON.stringify(fileObject));
   }
-  async editProperties(properties,values ,file = this.defaultFile,relative){
+  async setProperties(properties,values ,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to edit");
     if(relative && (this.defaultFile != file || file && !file.startsWith(this.dirname))&&this.dirname) file = adjustfiledir(file,this.dirname);
     if(!(properties instanceof Array)) throw Error("properties must be an Array");
