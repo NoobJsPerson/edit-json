@@ -1,6 +1,6 @@
 const fs = require('fs');
 function adjustfiledir(file,dir){
-	return dir+(file.startsWith(".")?file.replace(".",""):file);
+	return dir+(file.startsWith(".")?file.replace(".",""):!file.startsWith("/")?"/"+file:file);
 }
 module.exports = class EditClient {
 	/**
