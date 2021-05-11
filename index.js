@@ -17,7 +17,7 @@ module.exports = class EditClient {
     this.dirname = dirname  	
     if(defaultFile) this.defaultFile = applyrelative(defaultFile, dirname, relative);
   }
-   async write(file = this.defaultFile,obj = {},relative){
+   async write(obj = {}, file = this.defaultFile,relative){
    	if(!file) throw Error("No JSON to edit");
        if(!(obj instanceof Object)) throw Error("properties must be an Object");
    	file = applyrelative(file, this.dirname, relative)
@@ -29,7 +29,7 @@ module.exports = class EditClient {
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
     fileObject[property] = value;
-    return await this.write(file, fileObject);
+    return await this.write(fileObject, file);
   }
   async delete(property,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to edit");
@@ -37,7 +37,7 @@ module.exports = class EditClient {
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
     delete fileObject[property];
-    return await this.write(file, fileObject);
+    return await this.write(fileObject, file);
   }
   async bulDelete(properties,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to edit")
@@ -46,7 +46,7 @@ module.exports = class EditClient {
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
     for(let i = 0;i < properties.length;i++) delete fileObject[properties[i]];
-    return await this.write(file, fileObject);
+    return await this.write(fileObject, file);
   }
   async bulkSet(properties,values ,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to edit");
@@ -56,7 +56,7 @@ module.exports = class EditClient {
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
     for(let i = 0;i < properties.length;i++) fileObject[properties[i]] = values[i];
-    return await this.write(file, fileObject);
+    return await this.write(fileObject, file);
   }
   async get(property,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to get value from");
@@ -71,7 +71,7 @@ module.exports = class EditClient {
     const fileObject = JSON.parse(content);
     if(!(fileObject[property] instanceof Array)) throw Error("property must have a value of Array");
     fileObject[property].push(...values)
-    return await this.write(file, fileObject);
+    return await this.write(fileObject, file);
   }
   async unshift(property, value){
     if(!file) throw Error("No JSON to edit");
@@ -80,7 +80,7 @@ module.exports = class EditClient {
     const fileObject = JSON.parse(content);
     if(!(fileObject[property] instanceof Array)) throw Error("property must have a value of Array");
     fileObject[property].unshift(value)
-    return await this.write(file, fileObject);
+    return await this.write(fileObject, file);
   }
   async pop(property){
     if(!file) throw Error("No JSON to edit");
@@ -89,7 +89,7 @@ module.exports = class EditClient {
     const fileObject = JSON.parse(content);
     if(!(fileObject[property] instanceof Array)) throw Error("property must have a value of Array");
     fileObject[property].pop()
-    return await this.write(file, fileObject);
+    return await this.write(fileObject, file);
   }
   async shift(property){
     if(!file) throw Error("No JSON to edit");
@@ -98,7 +98,7 @@ module.exports = class EditClient {
     const fileObject = JSON.parse(content);
     if(!(fileObject[property] instanceof Array)) throw Error("property must have a value of Array");
     fileObject[property].shift()
-    return await this.write(file, fileObject);
+    return await this.write(fileObject, file);
   }
   async splice(property, start, deleteCount, ...values){
     if(!file) throw Error("No JSON to edit");
@@ -107,6 +107,6 @@ module.exports = class EditClient {
     const fileObject = JSON.parse(content);
     if(!(fileObject[property] instanceof Array)) throw Error("property must have a value of Array");
     fileObject[property].splice(start,deleteCount,...values);
-    return await this.write(file, fileObject);
+    return await this.write(fileObject, file);
   }
 };
