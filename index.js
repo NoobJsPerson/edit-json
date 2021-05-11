@@ -17,7 +17,7 @@ module.exports = class EditClient {
     this.dirname = dirname  	
     if(defaultFile) this.defaultFile = applyrelative(defaultFile, dirname, relative);
   }
-   async write(file,obj = {},relative){
+   async write(file = this.defaultFile,obj = {},relative){
    	if(!file) throw Error("No JSON to edit");
        if(!(obj instanceof Object)) throw Error("properties must be an Object");
    	file = applyrelative(file, this.defaultFile, this.dirname, relative)
