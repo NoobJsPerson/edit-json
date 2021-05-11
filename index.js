@@ -39,7 +39,7 @@ module.exports = class EditClient {
     delete fileObject[property];
     return await this.write(fileObject, file);
   }
-  async bulDelete(properties,file = this.defaultFile,relative){
+  async bulkDelete(properties,file = this.defaultFile,relative){
     if(!file) throw Error("No JSON to edit")
     file = applyrelative(file, this.dirname, relative);
     if(!(properties instanceof Array)) throw Error("properties must be an Array");
