@@ -11,21 +11,33 @@ const client = new edit('./storage.json');
 client.set('color','blue')
 //result {"color":"blue"}
 ```
-### **EditClient() (constructor):**
-* parameters: 
-  * **file**: the default directory of the file you want to edit
-  * **dirname**: the directory that the client edits files relatively from
-  * **relative**: a boolean specifying if the default directory should be relative to the location of the file that the function got called in
-* returns:
-An instance of the `EditClient` class
-### **set():**
-* parameters:
-  * **property**: a string containing the name of the property you to edit/create.
-  * **value**: the value assigned to the property it can be a number, string or another object
-  * **file**: the directory of the file you want to edit (if empty it'll edit the default file that got passed to the EditClient's constructor)
-  * **relative**: a boolean specifying if the directory should be relative to the location of the file that the function got called in.
-* returns:
+### `EditClient(file, dirname, relative)`
+
+#### Params
+
+- **String** `file`: the default directory of the file you want to edit
+- **String** `dirname`: the directory that the client edits files relatively from
+- **Boolean** `relative`: to specifying if the default directory should be relative to the location of the file that the function got called in
+
+#### Returns
+
+- **EditClient** The instance of the `EditClient` class
+
+### `set(property, value, file, relative)`
+
+#### Params
+
+  * **String** `property`: the name of the property you to edit/create.
+  * **String** `value`: the value assigned to the property it can be a number, string or another object
+  * **String** `file`: the directory of the file you want to edit (if empty it'll edit the default file that got passed to the EditClient's constructor)
+  * **Boolean** `relative`: a boolean specifying if the directory should be relative to the location of the file that the function got called in.
+  
+#### Returns
+  
 An empty promise.
+
+### `delete(property, file, relative)`
+
 #### Disclaimer
 this package is still under development consider contributing to it in the GitHub repository
 
