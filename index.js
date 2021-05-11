@@ -64,7 +64,7 @@ module.exports = class EditClient {
     const content = await fs.promises.readFile(file);
     return property ? content[property] : content;
   }
-  async push(property, ...values){
+  async push(property, ...values,file = this.defaultFile){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
@@ -73,16 +73,16 @@ module.exports = class EditClient {
     fileObject[property].push(...values)
     return await this.write(fileObject, file);
   }
-  async unshift(property, value){
+  async unshift(property,...values,file = this.defaultFile){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
     if(!(fileObject[property] instanceof Array)) throw Error("property must have a value of Array");
-    fileObject[property].unshift(value)
+    fileObject[property].unshift(...values)
     return await this.write(fileObject, file);
   }
-  async pop(property){
+  async pop(property,file = this.defaultFile){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
@@ -91,7 +91,7 @@ module.exports = class EditClient {
     fileObject[property].pop()
     return await this.write(fileObject, file);
   }
-  async shift(property){
+  async shift(property,file = this.defaultFile){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
@@ -100,7 +100,7 @@ module.exports = class EditClient {
     fileObject[property].shift()
     return await this.write(fileObject, file);
   }
-  async splice(property, start, deleteCount, ...values){
+  async splice(property, start, deleteCount, ...values,file = this.defaultFile){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
