@@ -20,7 +20,7 @@ module.exports = class EditClient {
    async write(file = this.defaultFile,obj = {},relative){
    	if(!file) throw Error("No JSON to edit");
        if(!(obj instanceof Object)) throw Error("properties must be an Object");
-   	file = applyrelative(file, this.defaultFile, this.dirname, relative)
+   	file = applyrelative(file, this.dirname, relative)
    	return await fs.promises.writeFile(file, JSON.stringify(obj));
    }
   async set(property,value,file = this.defaultFile,relative){
