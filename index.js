@@ -64,22 +64,22 @@ module.exports = class EditClient {
     const content = await fs.promises.readFile(file);
     return property ? content[property] : content;
   }
-  async push(file = this.defaultFile,property,...values){
+  async push(file = this.defaultFile, relative,property,...values){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
-    if(!(fileObject[property] instanceof Array)) throw Error("property must have a value of Array");
-    fileObject[property].push(...values)
+    if(!(property?fileObject[property]:fileObject instanceof Array)) throw Error("property must have a value of Array");
+    (property?fileObject[property]:fileObject).push(...values)
     return await this.write(fileObject, file);
   }
-  async unshift(file = this.defaultFile, property,...values){
+  async unshift(file = this.defaultFile,relative, property,...values){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
-    if(!(fileObject[property] instanceof Array)) throw Error("property must have a value of Array");
-    fileObject[property].unshift(...values)
+    if(!(property?fileObject[property]:fileObject instanceof Array)) throw Error("property must have a value of Array");
+    (property?fileObject[property]:fileObject).unshift(...values)
     return await this.write(fileObject, file);
   }
   async pop(property,file = this.defaultFile){
@@ -87,8 +87,8 @@ module.exports = class EditClient {
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
-    if(!(fileObject[property] instanceof Array)) throw Error("property must have a value of Array");
-    fileObject[property].pop()
+    if(!(property?fileObject[property]:fileObject instanceof Array)) throw Error("property must have a value of Array");
+    (property?fileObject[property]:fileObject).pop()
     return await this.write(fileObject, file);
   }
   async shift(property,file = this.defaultFile){
@@ -96,17 +96,17 @@ module.exports = class EditClient {
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
-    if(!(fileObject[property] instanceof Array)) throw Error("property must have a value of Array");
-    fileObject[property].shift()
+    if(!(property?fileObject[property]:fileObject instanceof Array)) throw Error("property must have a value of Array");
+    (property?fileObject[property]:fileObject).shift()
     return await this.write(fileObject, file);
   }
-  async splice(file = this.defaultFile, property, start, deleteCount, ...values){
+  async splice(file = this.defaultFile,relative, property, start, deleteCount, ...values){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
     const fileObject = JSON.parse(content);
-    if(!(fileObject[property] instanceof Array)) throw Error("property must have a value of Array");
-    fileObject[property].splice(start,deleteCount,...values);
+    if(!(property?fileObject[property]:fileObject instanceof Array)) throw Error("property must have a value of Array");
+    (property?fileObject[property]:fileObject).splice(start,deleteCount,...values);
     return await this.write(fileObject, file);
   }
 };
