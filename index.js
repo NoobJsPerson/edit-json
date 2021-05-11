@@ -64,7 +64,7 @@ module.exports = class EditClient {
     const content = await fs.promises.readFile(file);
     return property ? content[property] : content;
   }
-  async push(file = this.defaultFile,property,...values,){
+  async push(file = this.defaultFile,property,...values){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
