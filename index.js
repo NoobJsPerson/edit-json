@@ -64,7 +64,7 @@ module.exports = class EditClient {
     const content = await fs.promises.readFile(file);
     return property ? content[property] : content;
   }
-  async push(property, ...values,file = this.defaultFile){
+  async push(property,file = this.defaultFile, ...values,){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
@@ -73,7 +73,7 @@ module.exports = class EditClient {
     fileObject[property].push(...values)
     return await this.write(fileObject, file);
   }
-  async unshift(property,...values,file = this.defaultFile){
+  async unshift(property,file = this.defaultFile,...values){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
@@ -100,7 +100,7 @@ module.exports = class EditClient {
     fileObject[property].shift()
     return await this.write(fileObject, file);
   }
-  async splice(property, start, deleteCount, ...values,file = this.defaultFile){
+  async splice(property, start, deleteCount,file = this.defaultFile, ...values){
     if(!file) throw Error("No JSON to edit");
     file = applyrelative(file, this.dirname, relative);
     const content = await fs.promises.readFile(file);
