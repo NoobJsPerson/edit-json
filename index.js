@@ -1,6 +1,6 @@
 const fs = require('fs');
 function applyrelative(file,dirname, relative){
-	dirname && relative && !file.startsWith(dirname) ?dirname+(file.startsWith(".")?file.replace(".",""):!file.startsWith("/")?"/"+file:file):file
+	return dirname && relative && !file.startsWith(dirname) ?dirname+(file.startsWith(".")?file.replace(".",""):!file.startsWith("/")?"/"+file:file):file;
 }
 module.exports = class EditClient {
 	/**
