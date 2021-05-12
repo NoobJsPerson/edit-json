@@ -38,9 +38,15 @@ An empty promise.
 
 ### `delete(property, file, relative)`
 
+#### Params
+
 * **String** `property`: the name of the property you to delete.
 * **String** `file`: the directory of the file you want to edit (if empty it'll edit the default file that got passed to the EditClient's constructor)
 * **Boolean** `relative`: a boolean specifying if the directory should be relative to the location of the file that the function got called in.
+
+#### Returns
+
+An empty promise.
 
 #### Disclaimer
 this package is still under development consider contributing to it in the GitHub repository
