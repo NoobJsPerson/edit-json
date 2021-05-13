@@ -42,6 +42,10 @@ An empty promise.
 
 ### `delete(property, file, relative)`
 
+#### Usage
+
+Asynchronously delete a property
+
 #### Params
 
 * **String** `property`: the name of the property you to delete.
