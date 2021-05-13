@@ -25,6 +25,10 @@ client.set('color','blue')
 
 ### `set(property, value, sync, file, relative)`
 
+#### Usage
+
+Asynchronously sets a value for a property
+
 #### Params
 
   * **String** `property`: the name of the property you to edit/create.
