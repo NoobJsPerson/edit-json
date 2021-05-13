@@ -23,14 +23,15 @@ client.set('color','blue')
 
 - **EditClient** The instance of the `EditClient` class
 
-### `set(property, value, file, relative)`
+### `set(property, value, sync, file, relative)`
 
 #### Params
 
   * **String** `property`: the name of the property you to edit/create.
   * **String** `value`: the value assigned to the property it can be a number, string or another object
   * **String** `file`: the directory of the file you want to edit (if empty it'll edit the default file that got passed to the EditClient's constructor)
-  * **Boolean** `relative`: a boolean specifying if the directory should be relative to the location of the file that the function got called in.
+  * **Boolean** `sync` : specifying if it should be sync or async (false by default (Recommended))
+  * **Boolean** `relative`: specifying if the directory should be relative to the location of the file that the function got called in. (false by default)
   
 #### Returns
   
@@ -42,7 +43,7 @@ An empty promise.
 
 * **String** `property`: the name of the property you to delete.
 * **String** `file`: the directory of the file you want to edit (if empty it'll edit the default file that got passed to the EditClient's constructor)
-* **Boolean** `relative`: a boolean specifying if the directory should be relative to the location of the file that the function got called in.
+* **Boolean** `relative`: a boolean specifying if the directory should be relative to the location of the file that the function got called in (false by default)
 
 #### Returns
 
