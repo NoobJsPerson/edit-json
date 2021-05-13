@@ -30,7 +30,6 @@ client.set('color','blue')
   * **String** `property`: the name of the property you to edit/create.
   * **String** `value`: the value assigned to the property it can be a number, string or another object
   * **String** `file`: the directory of the file you want to edit (if empty it'll edit the default file that got passed to the EditClient's constructor)
-  * **Boolean** `sync` : specifying if it should be sync or async (false by default (Recommended))
   * **Boolean** `relative`: specifying if the directory should be relative to the location of the file that the function got called in. (false by default)
   
 #### Returns
@@ -42,13 +41,12 @@ An empty promise.
 #### Params
 
 * **String** `property`: the name of the property you to delete.
-* **Boolean** `sync` : specifying if it should be sync or async (false by default (Recommended))
 * **String** `file`: the directory of the file you want to edit (if empty it'll edit the default file that got passed to the EditClient's constructor)
 * **Boolean** `relative`: a boolean specifying if the directory should be relative to the location of the file that the function got called in (false by default)
 
 #### Returns
 
-An empty promise.
+An empty promise if sync and undefined 
 
 #### Disclaimer
 this package is still under development consider contributing to it in the GitHub repository
