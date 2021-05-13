@@ -6,7 +6,7 @@ Example:
 //defining the package
 const edit = require('@noobjsperson/edit-json');
 // creating an instance of EditClient with './storage.json' as the default file
-const client = new edit('./storage.json');
+const client = new edit('./storage.json',__dirname, true);
 // assign a value to a property in the default file
 client.set('color','blue')
 //result {"color":"blue"}
