@@ -1,7 +1,8 @@
 const fs = require('fs');
 
-function applyrelative(file, dirname, relative) {
-  return dirname && relative && !file.startsWith(dirname) ? dirname + (file.startsWith(".") ? file.replace(".", "") : !file.startsWith("/") ? "/" + file : file) : file.startsWith(".") ? file : "."+file;
+function applyrelative(file, dirname, relative){
+  if (!file.startsWith("./") || !file.startsWith("/")) file = "/" + file;
+  return dirname && relative && !file.startsWith(dirname) ? dirname + (file.startsWith(".") ? file.replace(".", "") : file) : !file.startsWith(".") ? "." + file : file;
 }
 module.exports = class EditClient {
   /**
